@@ -1,0 +1,30 @@
+services:
+
+  postgres:
+    image: postgres:16
+    hostname: postgres
+    container_name: postgres
+    ports:
+      - 5433:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=tg-bot-fortech
+    volumes:
+      - ./data:/var/lib/postgresql/data
+
+  server-part:
+    image: server-part
+    container_name: server-part
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    hostname: server-part
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/tg-bot-fortech
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1234
+    depends_on:
+      postgres:
+        condition: service_started
