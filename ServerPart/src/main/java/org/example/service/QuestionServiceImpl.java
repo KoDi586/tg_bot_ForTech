@@ -22,19 +22,11 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public List<QuestionResponseDto> getByLimit(Long limit) {
-
-        String newUrl = "https://the-trivia-api.com/v2/questions?region=RU&difficulties=medium";
-        List body = restClient.get().uri(newUrl).retrieve().body(List.class);
-
+        StringBuilder param = new StringBuilder();
+        param.append("?limit=").append(limit.toString());
+        param.append("&region=RU");
+        List<QuestionRequestDto> body = restClient.get().uri(TRIVIA_API + param).retrieve().body(List.class);
         log.info(body != null ? body.toString() : "null");
-//        String param;
-//        param = "?limit=2";
-//        try {
-//            QuestionRequestDto questionDto = restClient.get().uri(TRIVIA_API + param).retrieve().body(QuestionRequestDto.class);
-//            log.info(questionDto != null ? questionDto.toString() : "getting question is wrong!");
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
         return List.of();
     }
 }
