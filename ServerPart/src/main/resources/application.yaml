@@ -1,0 +1,6 @@
+trivia:
+  api: https://the-trivia-api.com/v2/questions
+
+name:
+  service:
+    localhost: http://localhost:8090
