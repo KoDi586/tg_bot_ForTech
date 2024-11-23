@@ -4,3 +4,6 @@ trivia:
 name:
   service:
     localhost: http://localhost:8090
+
+server:
+  port: 8082

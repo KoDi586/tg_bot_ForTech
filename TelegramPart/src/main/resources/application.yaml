@@ -1,0 +1,11 @@
+server:
+  port: 7676
+
+telegram:
+  bot:
+    name:
+    token:
+
+name:
+  service:
+    localhost: http://localhost:8082
