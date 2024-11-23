@@ -6,6 +6,7 @@ import org.example.config.RestClientConfiguration;
 import org.example.dto.QuestionRequestDto;
 import org.example.dto.QuestionResponseDto;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
@@ -36,20 +37,24 @@ public class QuestionServiceImpl implements QuestionService {
         }
         if (category != null) {
             if (paramsCount == 0) {
-                param.append("?category=").append(category);
+                param.append("?categories=").append(category);
             } else {
-                param.append("&category=").append(category);
+                param.append("&categories=").append(category);
             }
         }
         if (difficulty != null) {
             if (paramsCount == 0) {
-                param.append("?difficulty=").append(difficulty);
+                param.append("?difficulties=").append(difficulty);
             } else {
-                param.append("&difficulty=").append(difficulty);
+                param.append("&difficulties=").append(difficulty);
             }
         }
 
-        List<QuestionRequestDto> body = restClient.get().uri(TRIVIA_API + param).retrieve().body(List.class);
+        List<QuestionRequestDto> body = restClient.get()
+                .uri(TRIVIA_API + param)
+                .retrieve()
+                .body(new ParameterizedTypeReference<List<QuestionRequestDto>>() {});
+//        List<QuestionRequestDto> body = restClient.get().uri(TRIVIA_API + param).retrieve().body(List.class);
         log.info(body != null ? body.toString() : "null");
         return collectionListAfterConvert(body != null ? body : List.of());
     }

@@ -24,8 +24,4 @@ public class QuestionController {
         return ResponseEntity.ok(questions);
     }
 
-    @PostMapping
-    public ResponseEntity<?> checkRequestDto(@RequestBody QuestionRequestDto questionRequestDto) {
-        return null;
-    }
 }
