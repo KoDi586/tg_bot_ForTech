@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 public class QuestionResponseDto {
 
-    private Long id;
+    private String id;
     private String questionText;
     private List<String> variants;
     private String answer;

@@ -17,8 +17,10 @@ public class QuestionController {
     private final QuestionService questionService;
 
     @GetMapping
-    public ResponseEntity<?> getWithLimit(@RequestParam Long limit) {
-        List<QuestionResponseDto> questions = questionService.getByLimit(limit);
+    public ResponseEntity<?> getWithLimit(@RequestParam(required = false) Long limit,
+                                          @RequestParam(required = false) String category,
+                                          @RequestParam(required = false) String difficulty) {
+        List<QuestionResponseDto> questions = questionService.getByParams(limit, category, difficulty);
         return ResponseEntity.ok(questions);
     }
 

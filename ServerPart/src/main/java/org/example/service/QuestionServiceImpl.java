@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,13 +21,65 @@ public class QuestionServiceImpl implements QuestionService {
     private String TRIVIA_API;
     private final RestClient restClient;
 
+    /**
+     * получение, обработка и предоставление quiz по полученным параметрам
+     * @return список из вопросов по предоставленным параметрам
+     */
     @Override
-    public List<QuestionResponseDto> getByLimit(Long limit) {
+    public List<QuestionResponseDto> getByParams(Long limit, String category, String difficulty) {
+        //формирование параметров запроса
+        int paramsCount = 0;
         StringBuilder param = new StringBuilder();
-        param.append("?limit=").append(limit.toString());
-        param.append("&region=RU");
+        if (limit != null) {
+            param.append("?limit=").append(limit);
+            paramsCount++;
+        }
+        if (category != null) {
+            if (paramsCount == 0) {
+                param.append("?category=").append(category);
+            } else {
+                param.append("&category=").append(category);
+            }
+        }
+        if (difficulty != null) {
+            if (paramsCount == 0) {
+                param.append("?difficulty=").append(difficulty);
+            } else {
+                param.append("&difficulty=").append(difficulty);
+            }
+        }
+
         List<QuestionRequestDto> body = restClient.get().uri(TRIVIA_API + param).retrieve().body(List.class);
         log.info(body != null ? body.toString() : "null");
-        return List.of();
+        return collectionListAfterConvert(body != null ? body : List.of());
+    }
+
+    /**
+     * конвертация полученного дто в отправляемое пользователю.
+     * убирается все лишнее
+     * @param requestDto -  полученное с сайта дто
+     * @return - дто без лишнего
+     */
+    private QuestionResponseDto convertToCleanQuiz(QuestionRequestDto requestDto) {
+        return new QuestionResponseDto(
+                requestDto.getId(),
+                requestDto.getQuestion().getText(),
+                requestDto.getIncorrectAnswers(),
+                requestDto.getCorrectAnswer()
+        );
+    }
+
+    /**
+     * метод использующий конвертатор собирает список полученных
+     * в список отправляеемых
+     * @param questionRequestDtos - полученный список
+     * @return - отправляемый список
+     */
+    private List<QuestionResponseDto> collectionListAfterConvert(List<QuestionRequestDto> questionRequestDtos) {
+        List<QuestionResponseDto> result = new ArrayList<>();
+        for (QuestionRequestDto questionRequestDto : questionRequestDtos) {
+            result.add(convertToCleanQuiz(questionRequestDto));
+        }
+        return result;
     }
 }

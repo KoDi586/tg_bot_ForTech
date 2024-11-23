@@ -7,5 +7,5 @@ import java.util.List;
 public interface QuestionService {
 
 
-    List<QuestionResponseDto> getByLimit(Long limit);
+    List<QuestionResponseDto> getByParams(Long limit, String category, String difficulty);
 }
