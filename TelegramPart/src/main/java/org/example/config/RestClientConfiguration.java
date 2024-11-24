@@ -8,12 +8,20 @@ import org.springframework.web.client.RestClient;
 @Configuration
 public class RestClientConfiguration {
 
-    @Value("${name.service.localhost}")
+    @Value("${name.service.serverHost}")
     private String serverLocalhost;
 
+    @Value("${name.service.userHost}")
+    private  String userLocalhost;
+
     @Bean
-    public RestClient restClientDataBase(){
+    public RestClient restClientQuizCreate(){
         return RestClient.create(serverLocalhost);
+    }
+
+    @Bean
+    public RestClient restUserClient(){
+        return RestClient.create(userLocalhost);
     }
 
 }
