@@ -56,8 +56,8 @@ public class UserService {
                 .body(new ParameterizedTypeReference<UserRequestDto>() {
                 });
         int questionsCount = body != null ? body.getQuestionsCount() : 10;
-        String quizTopic = body != null ? body.getQuizTopic() : "any";
-        String quizDif = body != null ? body.getQuizDif() : "any";
+        String quizTopic = body != null ? body.getQuizTopic() : "history";
+        String quizDif = body != null ? body.getQuizDif() : "easy";
 
         String FIRST_MESSAGE_PART = "Викторина будет с такими параметрами:";
         String SECOND_MESSAGE_PART = "\nНа каждый вопрос будет дано 20 секунд времени. Каждый из " +
@@ -81,14 +81,14 @@ public class UserService {
         int paramsCount = 0;
         StringBuilder param = new StringBuilder();
         if (userRequestDto.getQuizDif() != null) {
-            param.append("?difficulties=").append(userRequestDto.getQuizDif());
+            param.append("?difficulty=").append(userRequestDto.getQuizDif());
             paramsCount++;
         }
         if (userRequestDto.getQuizTopic() != null) {
             if (paramsCount == 0) {
-                param.append("?categories=").append(userRequestDto.getQuizTopic());
+                param.append("?category=").append(userRequestDto.getQuizTopic());
             } else {
-                param.append("&categories=").append(userRequestDto.getQuizTopic());
+                param.append("&category=").append(userRequestDto.getQuizTopic());
             }
         }
 
@@ -131,14 +131,14 @@ public class UserService {
         int paramsCount = 0;
         StringBuilder param = new StringBuilder();
         if (userRequestDto.getQuizDif() != null) {
-            param.append("?difficulties=").append(userRequestDto.getQuizDif());
+            param.append("?difficulty=").append(userRequestDto.getQuizDif());
             paramsCount++;
         }
         if (userRequestDto.getQuizTopic() != null) {
             if (paramsCount == 0) {
-                param.append("?categories=").append(userRequestDto.getQuizTopic());
+                param.append("?category=").append(userRequestDto.getQuizTopic());
             } else {
-                param.append("&categories=").append(userRequestDto.getQuizTopic());
+                param.append("&category=").append(userRequestDto.getQuizTopic());
             }
         }
 

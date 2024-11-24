@@ -2,6 +2,7 @@ package org.example.command;
 
 import com.pengrad.telegrambot.model.Update;
 import org.example.command.commandHeap.*;
+import org.example.command.commandHeap.QuizTools.topic.*;
 import org.example.command.commandHeap.answers.FirstAnswer;
 import org.example.command.commandHeap.answers.FourthAnswer;
 import org.example.command.commandHeap.answers.SecondAnswer;
@@ -22,7 +23,13 @@ public class CommandContainer {
                             FirstAnswer firstAnswer,
                             SecondAnswer secondAnswer,
                             ThirdAnswer thirdAnswer,
-                            FourthAnswer fourthAnswer) {
+                            FourthAnswer fourthAnswer,
+
+                            ChooseQuizTopic chooseQuizTopic,
+                            FilmAndTvCategory filmAndTvCategory,
+                            FoodAndDrinkCategory foodAndDrinkCategory,
+                            HistoryCategory historyCategory,
+                            MusicCategory musicCategory) {
 
 
         commandMap.put(StartCommand.commandName, startCommand);
@@ -33,7 +40,11 @@ public class CommandContainer {
         commandMap.put(SecondAnswer.commandName, secondAnswer);
         commandMap.put(ThirdAnswer.commandName, thirdAnswer);
         commandMap.put(FourthAnswer.commandName, fourthAnswer);
-
+        commandMap.put(ChooseQuizTopic.commandName, chooseQuizTopic);
+        commandMap.put(FilmAndTvCategory.commandName, filmAndTvCategory);
+        commandMap.put(FoodAndDrinkCategory.commandName, foodAndDrinkCategory);
+        commandMap.put(HistoryCategory.commandName, historyCategory);
+        commandMap.put(MusicCategory.commandName, musicCategory);
     }
 
 

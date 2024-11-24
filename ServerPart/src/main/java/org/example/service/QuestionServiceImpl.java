@@ -50,8 +50,10 @@ public class QuestionServiceImpl implements QuestionService {
             }
         }
 
+        String uri = TRIVIA_API + param;
+        log.info("uri for find quiz: {}", uri);
         List<QuestionRequestDto> body = restClient.get()
-                .uri(TRIVIA_API + param)
+                .uri(uri)
                 .retrieve()
                 .body(new ParameterizedTypeReference<List<QuestionRequestDto>>() {});
 //        List<QuestionRequestDto> body = restClient.get().uri(TRIVIA_API + param).retrieve().body(List.class);

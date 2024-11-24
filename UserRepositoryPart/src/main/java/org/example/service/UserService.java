@@ -49,11 +49,11 @@ public class UserService {
         if (userModel.getChatId() == null) {
             log.info("пользователя нет в бд поэтому создаем нового");
             userModel.setUserId(0L);
-            userModel.setQuizDif("any");
+            userModel.setQuizDif("easy");
             userModel.setTrueCount(0);
             userModel.setChatId(userChatId);
             userModel.setQuestionsCount(10);
-            userModel.setQuizTopic("any");
+            userModel.setQuizTopic("food_and_drink");
             userModel.setQuestionNumberStopped(0);
         }
         return new UserResponseDto(
