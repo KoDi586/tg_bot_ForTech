@@ -18,7 +18,7 @@ public class QuizToolsMenu {
 
         InlineKeyboardButton button0 = new InlineKeyboardButton("Начать викторину").callbackData("/startQuiz");
         InlineKeyboardButton button1 = new InlineKeyboardButton("Тема викторины").callbackData("/chooseQuizTopic");
-        InlineKeyboardButton button2 = new InlineKeyboardButton("Сложность").callbackData("/Difficulty");
+        InlineKeyboardButton button2 = new InlineKeyboardButton("Сложность").callbackData("/chooseQuizDif");
         InlineKeyboardButton button3 = new InlineKeyboardButton("Количество вопросов").callbackData("/chooseCountQuestion");
         InlineKeyboardButton button4 = new InlineKeyboardButton("На главную").callbackData("/backInMainMenu");
 

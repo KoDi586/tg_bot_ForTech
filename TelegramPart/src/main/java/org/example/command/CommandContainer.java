@@ -2,6 +2,10 @@ package org.example.command;
 
 import com.pengrad.telegrambot.model.Update;
 import org.example.command.commandHeap.*;
+import org.example.command.commandHeap.QuizTools.difficulty.ChooseQuizDif;
+import org.example.command.commandHeap.QuizTools.difficulty.EasyDifficulty;
+import org.example.command.commandHeap.QuizTools.difficulty.HardDifficulty;
+import org.example.command.commandHeap.QuizTools.difficulty.MediumDifficulty;
 import org.example.command.commandHeap.QuizTools.topic.*;
 import org.example.command.commandHeap.answers.FirstAnswer;
 import org.example.command.commandHeap.answers.FourthAnswer;
@@ -29,7 +33,12 @@ public class CommandContainer {
                             FilmAndTvCategory filmAndTvCategory,
                             FoodAndDrinkCategory foodAndDrinkCategory,
                             HistoryCategory historyCategory,
-                            MusicCategory musicCategory) {
+                            MusicCategory musicCategory,
+
+                            ChooseQuizDif chooseQuizDif,
+                            EasyDifficulty easyDifficulty,
+                            HardDifficulty hardDifficulty,
+                            MediumDifficulty mediumDifficulty) {
 
 
         commandMap.put(StartCommand.commandName, startCommand);
@@ -45,6 +54,10 @@ public class CommandContainer {
         commandMap.put(FoodAndDrinkCategory.commandName, foodAndDrinkCategory);
         commandMap.put(HistoryCategory.commandName, historyCategory);
         commandMap.put(MusicCategory.commandName, musicCategory);
+        commandMap.put(ChooseQuizDif.commandName, chooseQuizDif);
+        commandMap.put(EasyDifficulty.commandName, easyDifficulty);
+        commandMap.put(HardDifficulty.commandName, hardDifficulty);
+        commandMap.put(MediumDifficulty.commandName, mediumDifficulty);
     }
 
 
