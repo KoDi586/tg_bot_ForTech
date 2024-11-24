@@ -1,34 +1,36 @@
 package org.example.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.dto.QuestionDto;
+//import org.example.dto.QuestionDto;
 import org.example.dto.UserRequestDto;
 import org.example.dto.UserResponseDto;
-import org.example.model.QuestionModel;
+//import org.example.model.QuestionModel;
 import org.example.model.UserModel;
 import org.example.repository.UserRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
+//    private final QuestionService questionService;
 
 
     public void setInfo(UserRequestDto userRequestDto) {
         UserModel userModel = userRepository.findByChatId(userRequestDto.getChatId()).orElse(new UserModel());
-
+        if (userModel.getUserId() == null) {
+            userModel = new UserModel();
+            userModel.setChatId(userRequestDto.getChatId());
+        }
         userModel.setQuizDif(userRequestDto.getQuizDif());
         userModel.setQuestionsCount(userRequestDto.getQuestionsCount());
         userModel.setQuizTopic(userRequestDto.getQuizTopic());
 
-        userModel.setQuestions(collectionAfterConvert(userRequestDto.getQuestions(), userModel));
+        userModel.setQuestionsId(userRequestDto.getQuestionsId());
         userModel.setQuestionNumberStopped(userRequestDto.getQuestionNumberStopped());
         userModel.setTrueCount(userRequestDto.getTrueCount());
         userRepository.save(userModel);
@@ -47,45 +49,45 @@ public class UserService {
                 userModel.getQuizDif(),
                 userModel.getQuestionsCount(),
 
-                collectionDtosAfterConvert(userModel.getQuestions()),
+                userModel.getQuestionsId(),
                 userModel.getQuestionNumberStopped()
         );
 
 
     }
 
-    public QuestionDto convertQuestionToDto(QuestionModel questionModel) {
-        return new QuestionDto(
-                questionModel.getId(),
-                questionModel.getQuestionText(),
-                questionModel.getVariants(),
-                questionModel.getAnswer()
-        );
-    }
-
-    public QuestionModel convertDtoToModel(QuestionDto questionDto, UserModel userModel) {
-        return new QuestionModel(
-                questionDto.getId(),
-                questionDto.getQuestionText(),
-                questionDto.getVariants(),
-                questionDto.getAnswer(),
-                userModel
-        );
-    }
-
-    public List<QuestionModel> collectionAfterConvert(List<QuestionDto> questionDtoList, UserModel userModel) {
-        List<QuestionModel> result = new ArrayList<>();
-        for (QuestionDto questionDto : questionDtoList) {
-            result.add(convertDtoToModel(questionDto, userModel));
-        }
-        return result;
-    }
-
-    public List<QuestionDto> collectionDtosAfterConvert(List<QuestionModel> questionModelList) {
-        List<QuestionDto> result = new ArrayList<>();
-        for (QuestionModel questionModel : questionModelList) {
-            result.add(convertQuestionToDto(questionModel));
-        }
-        return result;
-    }
+//    public QuestionDto convertQuestionToDto(QuestionModel questionModel) {
+//        return new QuestionDto(
+//                questionModel.getId(),
+//                questionModel.getQuestionText(),
+//                questionModel.getVariants(),
+//                questionModel.getAnswer()
+//        );
+//    }
+//
+//    public QuestionModel convertDtoToModel(QuestionDto questionDto, UserModel userModel) {
+//        return questionService.save(new QuestionModel(
+//                questionDto.getId(),
+//                questionDto.getQuestionText(),
+//                questionDto.getVariants(),
+//                questionDto.getAnswer(),
+//                userModel
+//        ));
+//    }
+//
+//    public List<QuestionModel> collectionAfterConvert(List<QuestionDto> questionDtoList, UserModel userModel) {
+//        List<QuestionModel> result = new ArrayList<>();
+//        for (QuestionDto questionDto : questionDtoList) {
+//            result.add(convertDtoToModel(questionDto, userModel));
+//        }
+//        return result;
+//    }
+//
+//    public List<QuestionDto> collectionDtosAfterConvert(List<QuestionModel> questionModelList) {
+//        List<QuestionDto> result = new ArrayList<>();
+//        for (QuestionModel questionModel : questionModelList) {
+//            result.add(convertQuestionToDto(questionModel));
+//        }
+//        return result;
+//    }
 }

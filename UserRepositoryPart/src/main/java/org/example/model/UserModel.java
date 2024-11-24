@@ -24,8 +24,8 @@ public class UserModel {
     private String quizTopic;
     private String quizDif;
     private Integer questionsCount;
-    @OneToMany(mappedBy = "userModel")
-    private List<QuestionModel> questions;
+
+    private List<Integer> questionsId;
     private Integer questionNumberStopped;
 
 }
