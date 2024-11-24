@@ -45,7 +45,7 @@ public class SecondAnswer implements Command {
         } catch (Exception e) {
             telegramBot.execute(new SendMessage(
                     userChatId,
-                    "викторина завершена ваш результат (дописать)"
+                    "викторина завершена! ваш результат: " + userService.findUser(userChatId).getTrueCount()
             ));
 
             toolsMenu.sendMessage(userChatId);
