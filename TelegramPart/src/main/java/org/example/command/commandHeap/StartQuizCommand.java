@@ -5,6 +5,7 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import lombok.RequiredArgsConstructor;
 import org.example.command.Command;
+import org.example.dto.QuestionDto;
 import org.example.dto.QuestionResponseDto;
 import org.example.listener.menus.QuizWorkingMenu;
 import org.example.sevrice.UserService;
@@ -25,7 +26,7 @@ public class StartQuizCommand implements Command {
 
         Long userChatId = update.message().chat().id();
         String infoAboutStartMessage = "вы начали викторину";
-        QuestionResponseDto questionDto = userService.startQuiz(userChatId);
+        QuestionDto questionDto = userService.startQuiz(userChatId);
 
         telegramBot.execute(new SendMessage(
                 userChatId,

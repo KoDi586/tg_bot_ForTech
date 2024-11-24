@@ -1,6 +1,7 @@
 package org.example.sevrice;
 
 import lombok.RequiredArgsConstructor;
+import org.example.dto.QuestionDto;
 import org.example.dto.QuestionResponseDto;
 import org.example.dto.UserRequestDto;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +14,7 @@ import org.springframework.web.client.RestClient;
 @RequiredArgsConstructor
 public class UserService {
 
-    @Value("${get.userInfo.url}")
+    @Value("${get.user.url}")
     private String GET_USER_URL;
     private final RestClient restClient;
 
@@ -46,7 +47,7 @@ public class UserService {
                 "\n сложность: " + quizDif + SECOND_MESSAGE_PART;
     }
 
-    public QuestionResponseDto startQuiz(Long userChatId) {
+    public QuestionDto startQuiz(Long userChatId) {
         UserRequestDto userRequestDto = findUser(userChatId);
         userRequestDto.setQuestions();
         userRequestDto.setQuestionNumberStopped(0);

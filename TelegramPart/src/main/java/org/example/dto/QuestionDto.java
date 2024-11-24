@@ -9,9 +9,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class QuestionResponseDto {
+public class QuestionDto {
 
-    private String id;
+    private Long id;
     private String questionText;
     private List<String> variants;
     private String answer;
