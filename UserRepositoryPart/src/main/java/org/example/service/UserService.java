@@ -2,6 +2,7 @@ package org.example.service;
 
 import lombok.RequiredArgsConstructor;
 //import org.example.dto.QuestionDto;
+import lombok.extern.slf4j.Slf4j;
 import org.example.dto.UserRequestDto;
 import org.example.dto.UserResponseDto;
 //import org.example.model.QuestionModel;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
 
     private final UserRepository userRepository;
@@ -37,6 +39,7 @@ public class UserService {
 //        userModel.setQuestionsId(userRequestDto.getQuestionsId());
         userModel.setQuestionNumberStopped(userRequestDto.getQuestionNumberStopped());
         userModel.setTrueCount(userRequestDto.getTrueCount());
+        userModel.setWaitAnswerNumber(userRequestDto.getWaitAnswerNumber());
         userRepository.save(userModel);
     }
 
@@ -44,7 +47,14 @@ public class UserService {
 
         UserModel userModel = userRepository.findByChatId(userChatId).orElse(new UserModel());
         if (userModel.getChatId() == null) {
-            return new UserResponseDto();
+            log.info("пользователя нет в бд поэтому создаем нового");
+            userModel.setUserId(0L);
+            userModel.setQuizDif("any");
+            userModel.setTrueCount(0);
+            userModel.setChatId(userChatId);
+            userModel.setQuestionsCount(10);
+            userModel.setQuizTopic("any");
+            userModel.setQuestionNumberStopped(0);
         }
         return new UserResponseDto(
                 userModel.getChatId(),
@@ -54,8 +64,9 @@ public class UserService {
                 userModel.getQuestionsCount(),
 
 //                userModel.getQuestionsId(),
-                userModel.getQuestionNumberStopped()
-        );
+                userModel.getQuestionNumberStopped(),
+                userModel.getWaitAnswerNumber()
+                );
 
 
     }

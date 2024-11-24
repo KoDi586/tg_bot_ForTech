@@ -1,5 +1,6 @@
 package org.example.config;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,11 +16,13 @@ public class RestClientConfiguration {
     private  String userLocalhost;
 
     @Bean
+    @Qualifier("restClientQuizCreate")
     public RestClient restClientQuizCreate(){
         return RestClient.create(serverLocalhost);
     }
 
     @Bean
+    @Qualifier("restUserClient")
     public RestClient restUserClient(){
         return RestClient.create(userLocalhost);
     }

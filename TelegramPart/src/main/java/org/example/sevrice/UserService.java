@@ -3,6 +3,8 @@ package org.example.sevrice;
 import lombok.RequiredArgsConstructor;
 import org.example.dto.QuestionDto;
 import org.example.dto.UserRequestDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
@@ -14,13 +16,21 @@ import java.util.List;
 
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class UserService {
 
     @Value("${get.user.url}")
     private String GET_USER_URL;
-    private final RestClient restClient;
-    private final QuizService quizService;
+    @Autowired
+    @Qualifier("restUserClient")
+    private RestClient restClient;
+    @Autowired
+    private QuizService quizService;
+
+//    public UserService(RestClient restClient, QuizService quizService) {
+//        this.restClient = restClient;
+//        this.quizService = quizService;
+//    }
 
     public UserRequestDto findUser(Long userChatId) {
         return restClient.get()
@@ -41,7 +51,7 @@ public class UserService {
 
     public String getMessageForQuizCreate(Long userChatId) {
         UserRequestDto body = restClient.get()
-                .uri(GET_USER_URL)
+                .uri(GET_USER_URL + "?userChatId=" + userChatId)
                 .retrieve()
                 .body(new ParameterizedTypeReference<UserRequestDto>() {
                 });
@@ -81,7 +91,23 @@ public class UserService {
                 param.append("&categories=").append(userRequestDto.getQuizTopic());
             }
         }
-        return quizService.getQuestionDto(param.toString());
+
+        QuestionDto questionDto = quizService.getQuestionDto(param.toString());
+        List<String> variants = questionDto.getVariants();
+        variants.add(questionDto.getAnswer());
+        Collections.shuffle(variants);
+        questionDto.setVariants(variants);
+
+        for (int i = 0; i < variants.size(); i++) {
+            if (variants.get(i).equals(questionDto.getAnswer())) {
+                userRequestDto.setWaitAnswerNumber(i+1);
+            }
+        }
+
+        saveUserInfo(userRequestDto);
+
+
+        return questionDto;
     }
 
     public boolean checkAnswer(Long userChatId, Integer answerNumber) {

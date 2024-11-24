@@ -5,6 +5,6 @@ CREATE TABLE IF NOT EXISTS public.user_model(
     quiz_topic TEXT,
     quiz_dif TEXT,
     questions_count INTEGER,
-    questions_id INTEGER[], -- Используем массив целых чисел для хранения IDs вопросов
-    question_number_stopped INTEGER
+    question_number_stopped INTEGER,
+    wait_answer_number INTEGER
 );

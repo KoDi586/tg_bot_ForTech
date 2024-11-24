@@ -21,7 +21,7 @@ public class FourthAnswer implements Command {
     private final QuizToolsMenu toolsMenu;
     @Override
     public void execute(Update update) {
-        Long userChatId = update.message().chat().id();
+        Long userChatId = update.callbackQuery().message().chat().id();
         boolean isTrue = userService.checkAnswer(userChatId, 4);
 
         if (isTrue) {

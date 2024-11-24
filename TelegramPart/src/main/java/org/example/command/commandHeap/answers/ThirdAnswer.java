@@ -5,6 +5,7 @@ import com.pengrad.telegrambot.model.Update;
 import com.pengrad.telegrambot.request.SendMessage;
 import lombok.RequiredArgsConstructor;
 import org.example.command.Command;
+import org.example.dto.QuestionDto;
 import org.example.listener.menus.QuizToolsMenu;
 import org.example.listener.menus.QuizWorkingMenu;
 import org.example.sevrice.UserService;
@@ -20,7 +21,7 @@ public class ThirdAnswer implements Command {
     private final QuizToolsMenu toolsMenu;
     @Override
     public void execute(Update update) {
-        Long userChatId = update.message().chat().id();
+        Long userChatId = update.callbackQuery().message().chat().id();
         boolean isTrue = userService.checkAnswer(userChatId, 3);
 
         if (isTrue) {
@@ -37,7 +38,7 @@ public class ThirdAnswer implements Command {
         }
 
         try {
-            QuestionResponseDto questionDto = userService.getContinueQuestion(userChatId);
+            QuestionDto questionDto = userService.getContinueQuestion(userChatId);
             quizWorkingMenu.sendMessage(userChatId, questionDto);
         } catch (Exception e) {
             telegramBot.execute(new SendMessage(

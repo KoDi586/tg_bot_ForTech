@@ -3,9 +3,17 @@ server:
 
 telegram:
   bot:
-    name:
-    token:
+    name: QuizFortechBot
+    token: 8178986798:AAFQlP-t-_Q_-osk-7iXF8li0T9f0WH5pBQ
 
 name:
   service:
-    localhost: http://localhost:8082
+    serverHost: http://localhost:8082
+    userHost: http://localhost:3001
+
+get:
+  quiz:
+    url: /question
+
+  user:
+    url: /user

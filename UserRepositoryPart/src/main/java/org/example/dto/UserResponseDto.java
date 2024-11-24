@@ -18,5 +18,6 @@ public class UserResponseDto {
     private Integer questionsCount;
 //    private List<Integer> questionsId;
     private Integer questionNumberStopped;
+    private Integer waitAnswerNumber;
 
 }

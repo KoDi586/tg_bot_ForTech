@@ -4,17 +4,20 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dto.QuestionDto;
 import org.example.dto.UserRequestDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @Slf4j
 public class QuizService {
-
-    private final RestClient restClient;
+    @Autowired
+    @Qualifier("restClientQuizCreate")
+    private RestClient restClient;
     @Value("${get.quiz.url}")
     private String URI;
 

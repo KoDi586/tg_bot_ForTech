@@ -6,7 +6,6 @@ import com.pengrad.telegrambot.request.SendMessage;
 import lombok.RequiredArgsConstructor;
 import org.example.command.Command;
 import org.example.dto.QuestionDto;
-import org.example.dto.QuestionResponseDto;
 import org.example.listener.menus.QuizWorkingMenu;
 import org.example.sevrice.UserService;
 import org.springframework.stereotype.Component;
@@ -24,7 +23,7 @@ public class StartQuizCommand implements Command {
     @Override
     public void execute(Update update) {
 
-        Long userChatId = update.message().chat().id();
+        Long userChatId = update.callbackQuery().message().chat().id();
         String infoAboutStartMessage = "вы начали викторину";
         QuestionDto questionDto = userService.startQuiz(userChatId);
 
