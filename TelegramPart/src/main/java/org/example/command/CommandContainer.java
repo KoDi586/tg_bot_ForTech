@@ -2,6 +2,10 @@ package org.example.command;
 
 import com.pengrad.telegrambot.model.Update;
 import org.example.command.commandHeap.*;
+import org.example.command.commandHeap.QuizTools.count.ChooseCountQuestion;
+import org.example.command.commandHeap.QuizTools.count.Count10;
+import org.example.command.commandHeap.QuizTools.count.Count20;
+import org.example.command.commandHeap.QuizTools.count.Count5;
 import org.example.command.commandHeap.QuizTools.difficulty.ChooseQuizDif;
 import org.example.command.commandHeap.QuizTools.difficulty.EasyDifficulty;
 import org.example.command.commandHeap.QuizTools.difficulty.HardDifficulty;
@@ -38,7 +42,10 @@ public class CommandContainer {
                             ChooseQuizDif chooseQuizDif,
                             EasyDifficulty easyDifficulty,
                             HardDifficulty hardDifficulty,
-                            MediumDifficulty mediumDifficulty) {
+                            MediumDifficulty mediumDifficulty,
+
+                            ChooseCountQuestion chooseCountQuestion,
+                            Count5 count5, Count10 count10, Count20 count20) {
 
 
         commandMap.put(StartCommand.commandName, startCommand);
@@ -58,6 +65,10 @@ public class CommandContainer {
         commandMap.put(EasyDifficulty.commandName, easyDifficulty);
         commandMap.put(HardDifficulty.commandName, hardDifficulty);
         commandMap.put(MediumDifficulty.commandName, mediumDifficulty);
+        commandMap.put(ChooseCountQuestion.commandName, chooseCountQuestion);
+        commandMap.put(Count20.commandName, count20);
+        commandMap.put(Count10.commandName, count10);
+        commandMap.put(Count5.commandName, count5);
     }
 
 
