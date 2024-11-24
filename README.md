@@ -7,7 +7,7 @@
 - **`server_part`**  
   Отвечает за генерацию вопросов для викторины.
 
-  - **`user_repository_part`**  
+- **`user_repository_part`**  
   Обеспечивает работу с пользовательскими данными.
 
 - **`telegram_part`**  
