@@ -6,7 +6,7 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user_model")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,14 +16,15 @@ public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Column(name = "id")
+    private Long userId;
 
     private Long chatId;
     private Integer trueCount;
     private String quizTopic;
     private String quizDif;
     private Integer questionsCount;
-//    @OneToMany(mappedBy = "UserModel")
+    @OneToMany(mappedBy = "userModel")
     private List<QuestionModel> questions;
     private Integer questionNumberStopped;
 

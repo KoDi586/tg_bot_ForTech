@@ -22,6 +22,6 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<UserResponseDto> getUserById(@RequestParam Long userChatId) {
-        return userService.findUserByChatId(userChatId);
+        return ResponseEntity.ok(userService.findUserByChatId(userChatId));
     }
 }
