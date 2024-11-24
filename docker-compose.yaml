@@ -12,19 +12,54 @@ services:
       - POSTGRES_DB=tg-bot-fortech
     volumes:
       - ./data:/var/lib/postgresql/data
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
 
   server-part:
+    restart: unless-stopped
     image: server-part
     container_name: server-part
     build:
+      context: ./ServerPart
       dockerfile: Dockerfile
     ports:
-      - 8080:8080
+      - 8083:8082
     hostname: server-part
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/tg-bot-fortech
-      - SPRING_DATASOURCE_USERNAME=postgres
-      - SPRING_DATASOURCE_PASSWORD=1234
+
     depends_on:
       postgres:
         condition: service_started
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+
+  user-repository-part:
+    image: user-repository-part
+    container_name: user-repository-part
+    build:
+      context: ./UserRepositoryPart
+      dockerfile: Dockerfile
+    ports:
+      - 3001:3001
+    hostname: user-repository-part
+
+    environment:
+          - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/tg-bot-fortech
+          - SPRING_DATASOURCE_USERNAME=postgres
+          - SPRING_DATASOURCE_PASSWORD=1234
+
+  telegram-part:
+    image: telegram-part
+    container_name: telegram-part
+    build:
+      context: ./TelegramPart
+      dockerfile: Dockerfile
+    ports:
+      - 7676:7676
+    hostname: telegram-part
