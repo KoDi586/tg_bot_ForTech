@@ -7,6 +7,10 @@ spring:
     username: postgres
     password: 1234
 
+  sql:
+    init:
+      schema-locations: classpath:sql/schema.sql
+      mode: always
 #  jpa:
 #  hibernate:
 #    ddl-auto: update
