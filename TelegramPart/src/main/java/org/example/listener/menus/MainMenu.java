@@ -18,7 +18,7 @@ public class MainMenu {
     public void sendMessage(long chatId) {
 
         InlineKeyboardButton button0 = new InlineKeyboardButton("Личный кабинет").callbackData("/LKab");
-        InlineKeyboardButton button1 = new InlineKeyboardButton("Начать викторину").callbackData("/quizEditor");
+        InlineKeyboardButton button1 = new InlineKeyboardButton("Викторина").callbackData("/quizEditor");
         InlineKeyboardButton button2 = new InlineKeyboardButton("инфо").callbackData("/help");
         InlineKeyboardButton button3 = new InlineKeyboardButton("поддержать проект").callbackData("/donat");
 

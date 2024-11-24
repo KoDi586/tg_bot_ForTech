@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class QuizToolsMenu {
     private final TelegramBot telegramBot;
-    private static final String TEXT_FOR_TOOlS_MENU = "Настройка викторины:";
+    private static final String TEXT_FOR_TOOlS_MENU = "Настройка новой викторины:";
 
     public void sendMessage(long chatId) {
 

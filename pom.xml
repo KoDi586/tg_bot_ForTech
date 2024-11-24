@@ -13,6 +13,7 @@
 
         <module>ServerPart</module>
         <module>TelegramPart</module>
+        <module>UserRepositoryPart</module>
     </modules>
 
     <properties>

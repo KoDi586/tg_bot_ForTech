@@ -15,7 +15,7 @@ public class StartCommand implements Command {
     private final TelegramBot telegramBot;
     private final MainMenu mainMenu;
     public static String commandName = "/start";
-    private static String HELLO = "! Рады приветствовать вас в самом лучшем боте для do quiz!" +
+    private static final String HELLO = "! Рады приветствовать вас в самом лучшем боте для do quiz!" +
             " Здесь вы можете повикторинить на множество тематик! " +
             "Мой создатель очень рад тому что вы решили воспользоваться именно моими викторинами!!!" +
 
