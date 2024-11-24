@@ -26,11 +26,15 @@ public class UserService {
             userModel = new UserModel();
             userModel.setChatId(userRequestDto.getChatId());
         }
+
+        if (userModel.getQuestionsCount() == null) {
+            userModel.setQuestionsCount(10);
+        }
         userModel.setQuizDif(userRequestDto.getQuizDif());
         userModel.setQuestionsCount(userRequestDto.getQuestionsCount());
         userModel.setQuizTopic(userRequestDto.getQuizTopic());
 
-        userModel.setQuestionsId(userRequestDto.getQuestionsId());
+//        userModel.setQuestionsId(userRequestDto.getQuestionsId());
         userModel.setQuestionNumberStopped(userRequestDto.getQuestionNumberStopped());
         userModel.setTrueCount(userRequestDto.getTrueCount());
         userRepository.save(userModel);
@@ -49,7 +53,7 @@ public class UserService {
                 userModel.getQuizDif(),
                 userModel.getQuestionsCount(),
 
-                userModel.getQuestionsId(),
+//                userModel.getQuestionsId(),
                 userModel.getQuestionNumberStopped()
         );
 

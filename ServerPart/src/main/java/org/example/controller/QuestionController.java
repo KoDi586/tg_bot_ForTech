@@ -10,18 +10,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping
+@RequestMapping("/question")
 @RequiredArgsConstructor
 public class QuestionController {
 
     private final QuestionService questionService;
 
     @GetMapping
-    public ResponseEntity<?> getWithLimit(@RequestParam(required = false) Long limit,
+    public ResponseEntity<?> getWithLimit(/*@RequestParam(required = false) Long limit,*/
                                           @RequestParam(required = false) String category,
                                           @RequestParam(required = false) String difficulty) {
-        List<QuestionResponseDto> questions = questionService.getByParams(limit, category, difficulty);
-        return ResponseEntity.ok(questions);
+        QuestionResponseDto question = questionService.getByParams(1L, category, difficulty).getFirst();
+        return ResponseEntity.ok(question);
     }
 
 }

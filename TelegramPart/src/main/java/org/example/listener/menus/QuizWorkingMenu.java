@@ -6,7 +6,7 @@ import com.pengrad.telegrambot.model.request.InlineKeyboardMarkup;
 import com.pengrad.telegrambot.model.request.Keyboard;
 import com.pengrad.telegrambot.request.SendMessage;
 import lombok.RequiredArgsConstructor;
-import org.example.dto.QuestionResponseDto;
+import org.example.dto.QuestionDto;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -19,7 +19,7 @@ public class QuizWorkingMenu {
 
     private final TelegramBot telegramBot;
 
-    public void sendMessage(long chatId, QuestionResponseDto questionDto) {
+    public void sendMessage(long chatId, QuestionDto questionDto) {
 
         String TEXT_FOR_MAIN_MENU = questionDto.getQuestionText();
 

@@ -16,7 +16,8 @@ public class UserRequestDto {
     private String quizTopic;
     private String quizDif;
     private Integer questionsCount;
-    private List<QuestionDto> questions;
+//    private List<Integer> questionsId;
     private Integer questionNumberStopped;
+    private Integer waitAnswerNumber;
 
 }

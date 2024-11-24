@@ -16,7 +16,7 @@ public class UserResponseDto {
     private String quizTopic;
     private String quizDif;
     private Integer questionsCount;
-    private List<Integer> questionsId;
+//    private List<Integer> questionsId;
     private Integer questionNumberStopped;
 
 }

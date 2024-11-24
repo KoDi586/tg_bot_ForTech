@@ -25,7 +25,7 @@ public class UserModel {
     private String quizDif;
     private Integer questionsCount;
 
-    private List<Integer> questionsId;
+//    private List<Integer> questionsId;
     private Integer questionNumberStopped;
 
 }
